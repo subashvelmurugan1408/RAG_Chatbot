@@ -1,0 +1,461 @@
+test_queries = [
+    # RAG Specific
+    "What is retrieval augmented generation?",
+    "How does dense passage retrieval work?",
+    
+    # Transformers
+    "Explain the attention mechanism",
+    "What are multi-head attention?",
+    
+    # LLMs
+    "How does GPT-3 perform few-shot learning?",
+    "What are the scaling laws for language models?",
+    
+    # Embeddings
+    "What is sentence BERT?",
+    "How are embeddings created?",
+    
+    # General
+    "What are the key differences between BERT and GPT?",
+    "How do vision transformers work?",
+]
+
+##python##
+# Python Test Queries for RAG System
+# Organized by difficulty and topic
+
+PYTHON_TEST_QUERIES = {
+    
+    # ==================== BEGINNER LEVEL ====================
+    "BEGINNER_BASICS": [
+        "What is Python?",
+        "How do I print something in Python?",
+        "What are variables?",
+        "How do I create a variable?",
+        "What is a data type?",
+        "What are the main data types in Python?",
+        "How do I check the type of a variable?",
+        "What is an integer?",
+        "What is a string?",
+        "What is a boolean?",
+        "How do I convert a string to an integer?",
+        "How do I convert an integer to a string?",
+        "What is type casting?",
+        "How do I write comments in Python?",
+        "What is indentation in Python?",
+    ],
+    
+    "BEGINNER_OPERATORS": [
+        "What are arithmetic operators?",
+        "How do I add two numbers?",
+        "How do I subtract numbers?",
+        "How do I multiply numbers?",
+        "How do I divide numbers?",
+        "What is the modulo operator?",
+        "What is the power operator?",
+        "What are comparison operators?",
+        "What are logical operators?",
+        "What does 'and' operator do?",
+        "What does 'or' operator do?",
+        "What does 'not' operator do?",
+    ],
+    
+    "BEGINNER_STRINGS": [
+        "What is a string?",
+        "How do I create a string?",
+        "How do I find the length of a string?",
+        "How do I access a character in a string?",
+        "What is string slicing?",
+        "How do I convert a string to uppercase?",
+        "How do I convert a string to lowercase?",
+        "How do I replace characters in a string?",
+        "How do I check if a substring exists?",
+        "How do I split a string?",
+        "How do I join strings?",
+        "What is string formatting?",
+        "How do I format strings with variables?",
+        "What are f-strings?",
+        "How do I strip whitespace from a string?",
+    ],
+    
+    "BEGINNER_INPUT_OUTPUT": [
+        "How do I take input from a user?",
+        "How do I print to the console?",
+        "How do I print multiple values?",
+        "How do I read from a file?",
+        "How do I write to a file?",
+        "How do I append to a file?",
+        "What does 'with' statement do?",
+        "How do I open a file?",
+        "How do I close a file?",
+    ],
+    
+    # ==================== INTERMEDIATE LEVEL ====================
+    "INTERMEDIATE_LISTS": [
+        "What is a list?",
+        "How do I create a list?",
+        "How do I add an element to a list?",
+        "How do I remove an element from a list?",
+        "How do I access list elements?",
+        "What is list indexing?",
+        "What is list slicing?",
+        "How do I iterate through a list?",
+        "What is list comprehension?",
+        "How do I sort a list?",
+        "How do I reverse a list?",
+        "How do I find the length of a list?",
+        "How do I check if an element is in a list?",
+        "What are list methods?",
+        "How do I use append, extend, and insert?",
+        "What is the difference between append and extend?",
+    ],
+    
+    "INTERMEDIATE_TUPLES": [
+        "What is a tuple?",
+        "How do I create a tuple?",
+        "What is the difference between lists and tuples?",
+        "Why use tuples instead of lists?",
+        "How do I unpack a tuple?",
+        "Can I modify a tuple?",
+        "How do I access tuple elements?",
+        "What are immutable data types?",
+        "Can tuples contain different data types?",
+    ],
+    
+    "INTERMEDIATE_DICTIONARIES": [
+        "What is a dictionary?",
+        "How do I create a dictionary?",
+        "How do I add a key-value pair?",
+        "How do I access dictionary values?",
+        "How do I remove a key from a dictionary?",
+        "How do I check if a key exists?",
+        "What are dictionary methods?",
+        "How do I get all keys from a dictionary?",
+        "How do I get all values from a dictionary?",
+        "How do I iterate through a dictionary?",
+        "What is the get() method?",
+        "How do I update a dictionary?",
+        "Can dictionary keys be lists?",
+        "What types can be dictionary keys?",
+    ],
+    
+    "INTERMEDIATE_SETS": [
+        "What is a set?",
+        "How do I create a set?",
+        "What is the difference between sets and lists?",
+        "How do I add elements to a set?",
+        "How do I remove elements from a set?",
+        "Can sets have duplicate values?",
+        "How do I check set membership?",
+        "What set operations can I perform?",
+        "What is union in sets?",
+        "What is intersection in sets?",
+        "What is difference in sets?",
+    ],
+    
+    "INTERMEDIATE_CONDITIONALS": [
+        "How do I write an if statement?",
+        "What is an if-else statement?",
+        "What is an if-elif-else statement?",
+        "How do I use comparison operators?",
+        "How do I use logical operators in conditions?",
+        "What is a nested if statement?",
+        "What is a ternary operator?",
+        "How do I write inline if-else?",
+    ],
+    
+    "INTERMEDIATE_LOOPS": [
+        "What is a for loop?",
+        "How do I write a for loop?",
+        "What is the range() function?",
+        "How do I use range with step?",
+        "What is a while loop?",
+        "How do I use break in loops?",
+        "How do I use continue in loops?",
+        "What is loop else?",
+        "How do I nest loops?",
+        "What is enumerate()?",
+        "How do I zip two lists?",
+    ],
+    
+    # ==================== ADVANCED LEVEL ====================
+    "ADVANCED_FUNCTIONS": [
+        "What is a function?",
+        "How do I define a function?",
+        "What is a return statement?",
+        "What are function parameters?",
+        "What are default parameters?",
+        "What is *args?",
+        "What is **kwargs?",
+        "How do I use variable-length arguments?",
+        "What is a lambda function?",
+        "How do I write a lambda function?",
+        "What are higher-order functions?",
+        "What is recursion?",
+        "How do I write a recursive function?",
+        "What is function scope?",
+        "What are local and global variables?",
+        "What is a closure?",
+        "What is a decorator?",
+        "How do I create a decorator?",
+    ],
+    
+    "ADVANCED_OOP": [
+        "What is object-oriented programming?",
+        "What is a class?",
+        "How do I define a class?",
+        "What is an object?",
+        "How do I create an instance of a class?",
+        "What is __init__?",
+        "What is self?",
+        "What are instance variables?",
+        "What are class variables?",
+        "What are methods?",
+        "What is inheritance?",
+        "How do I inherit from a parent class?",
+        "What is method overriding?",
+        "What is super()?",
+        "What is polymorphism?",
+        "What is encapsulation?",
+        "What are properties?",
+        "What are getters and setters?",
+        "What is multiple inheritance?",
+        "What is a staticmethod?",
+        "What is a classmethod?",
+    ],
+    
+    "ADVANCED_EXCEPTIONS": [
+        "What is exception handling?",
+        "What is a try-except block?",
+        "How do I catch specific exceptions?",
+        "What is a finally block?",
+        "How do I raise exceptions?",
+        "What is a custom exception?",
+        "How do I create a custom exception?",
+        "What are different types of exceptions?",
+        "What is ValueError?",
+        "What is TypeError?",
+        "What is KeyError?",
+        "What is IndexError?",
+        "What is ZeroDivisionError?",
+        "How do I use else with try-except?",
+    ],
+    
+    "ADVANCED_DECORATORS": [
+        "What is a decorator?",
+        "How do I write a simple decorator?",
+        "What is @property decorator?",
+        "How do I use decorators with arguments?",
+        "What are multiple decorators?",
+        "How do I apply multiple decorators?",
+    ],
+    
+    # ==================== LIBRARIES ====================
+    "LIBRARIES_BUILTIN": [
+        "What is the math library?",
+        "How do I use math functions?",
+        "What is the random library?",
+        "How do I generate random numbers?",
+        "What is the datetime library?",
+        "How do I work with dates and times?",
+        "What is the json library?",
+        "How do I parse JSON?",
+        "What is the re library?",
+        "How do I use regular expressions?",
+        "What is the os library?",
+        "How do I interact with the operating system?",
+        "What is the sys library?",
+        "What is the collections library?",
+        "What is the itertools library?",
+    ],
+    
+    "LIBRARIES_DATA": [
+        "What is NumPy?",
+        "What is Pandas?",
+        "What is Matplotlib?",
+        "How do I create plots?",
+        "What is Seaborn?",
+        "What is Scikit-learn?",
+        "What is TensorFlow?",
+        "What is PyTorch?",
+    ],
+    
+    "LIBRARIES_WEB": [
+        "What is requests?",
+        "How do I make HTTP requests?",
+        "What is BeautifulSoup?",
+        "How do I scrape websites?",
+        "What is Django?",
+        "What is Flask?",
+        "What is FastAPI?",
+    ],
+    
+    # ==================== FILE OPERATIONS ====================
+    "FILE_OPERATIONS": [
+        "How do I read a file?",
+        "How do I write to a file?",
+        "How do I read a file line by line?",
+        "What modes can I open a file with?",
+        "What is 'r' mode?",
+        "What is 'w' mode?",
+        "What is 'a' mode?",
+        "What is 'x' mode?",
+        "How do I check if a file exists?",
+        "How do I delete a file?",
+        "How do I create a directory?",
+        "How do I list files in a directory?",
+        "How do I get file information?",
+        "What is the pathlib library?",
+        "How do I work with file paths?",
+    ],
+    
+    # ==================== PRACTICAL EXAMPLES ====================
+    "PRACTICAL_EXAMPLES": [
+        "How do I find the factorial of a number?",
+        "How do I check if a number is prime?",
+        "How do I reverse a string?",
+        "How do I count word frequency?",
+        "How do I remove duplicates from a list?",
+        "How do I find the maximum and minimum?",
+        "How do I check if a string is a palindrome?",
+        "How do I generate Fibonacci sequence?",
+        "How do I merge two dictionaries?",
+        "How do I create a simple calculator?",
+        "How do I validate email?",
+        "How do I sort a list of dictionaries?",
+        "How do I flatten a nested list?",
+        "How do I create a matrix?",
+        "How do I transpose a matrix?",
+    ],
+    
+    # ==================== BEST PRACTICES ====================
+    "BEST_PRACTICES": [
+        "What is PEP 8?",
+        "How should I name variables?",
+        "What are coding conventions?",
+        "How should I format my code?",
+        "What is a docstring?",
+        "How do I write good comments?",
+        "What is DRY principle?",
+        "What is SOLID principle?",
+        "How do I debug Python code?",
+        "What is a linter?",
+        "What is code formatting?",
+        "What is type hints?",
+        "How do I use type hints?",
+        "What is unit testing?",
+        "How do I write tests?",
+        "What is pytest?",
+    ],
+}
+
+# Flat list for easy iteration
+ALL_QUERIES = []
+for category, queries in PYTHON_TEST_QUERIES.items():
+    ALL_QUERIES.extend(queries)
+
+def get_queries_by_level(level="all"):
+    """Get queries by difficulty level"""
+    if level == "beginner":
+        return [q for cat, queries in PYTHON_TEST_QUERIES.items() 
+                if cat.startswith("BEGINNER") for q in queries]
+    elif level == "intermediate":
+        return [q for cat, queries in PYTHON_TEST_QUERIES.items() 
+                if cat.startswith("INTERMEDIATE") for q in queries]
+    elif level == "advanced":
+        return [q for cat, queries in PYTHON_TEST_QUERIES.items() 
+                if cat.startswith("ADVANCED") for q in queries]
+    else:
+        return ALL_QUERIES
+
+def test_rag_with_python_queries():
+    """Test RAG system with Python queries"""
+    from rag_chain import create_rag_chain
+    
+    print("=" * 80)
+    print("TESTING RAG WITH PYTHON DOCUMENTS")
+    print("=" * 80)
+    
+    chain = create_rag_chain()
+    
+    # Test with different difficulty levels
+    test_levels = {
+        "BEGINNER": get_queries_by_level("beginner")[:5],
+        "INTERMEDIATE": get_queries_by_level("intermediate")[:5],
+        "ADVANCED": get_queries_by_level("advanced")[:5],
+    }
+    
+    for level, queries in test_levels.items():
+        print(f"\n{'='*80}")
+        print(f"TESTING {level} LEVEL")
+        print(f"{'='*80}\n")
+        
+        for i, query in enumerate(queries, 1):
+            print(f"[{i}] Query: {query}")
+            try:
+                answer = chain.invoke(query)
+                print(f"    Answer: {answer[:200]}...\n")
+            except Exception as e:
+                print(f"    Error: {e}\n")
+
+def print_all_queries():
+    """Print all queries organized by category"""
+    print("=" * 80)
+    print("PYTHON RAG TEST QUERIES")
+    print("=" * 80)
+    
+    for category, queries in PYTHON_TEST_QUERIES.items():
+        print(f"\n{'#'*80}")
+        print(f"# {category}")
+        print(f"{'#'*80}\n")
+        
+        for i, query in enumerate(queries, 1):
+            print(f"{i:3}. {query}")
+
+def get_random_queries(count=10):
+    """Get random queries for testing"""
+    import random
+    return random.sample(ALL_QUERIES, min(count, len(ALL_QUERIES)))
+
+if __name__ == "__main__":
+    import sys
+    
+    if len(sys.argv) > 1:
+        command = sys.argv[1]
+        
+        if command == "print":
+            print_all_queries()
+        elif command == "test":
+            test_rag_with_python_queries()
+        elif command == "random":
+            count = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+            queries = get_random_queries(count)
+            print("\nRandom Python Test Queries:")
+            print("=" * 80)
+            for i, q in enumerate(queries, 1):
+                print(f"{i}. {q}")
+        elif command == "beginner":
+            queries = get_queries_by_level("beginner")
+            print(f"\nTotal Beginner Queries: {len(queries)}\n")
+            for i, q in enumerate(queries, 1):
+                print(f"{i:3}. {q}")
+        elif command == "intermediate":
+            queries = get_queries_by_level("intermediate")
+            print(f"\nTotal Intermediate Queries: {len(queries)}\n")
+            for i, q in enumerate(queries, 1):
+                print(f"{i:3}. {q}")
+        elif command == "advanced":
+            queries = get_queries_by_level("advanced")
+            print(f"\nTotal Advanced Queries: {len(queries)}\n")
+            for i, q in enumerate(queries, 1):
+                print(f"{i:3}. {q}")
+    else:
+        print("Python Test Queries Module")
+        print("\nUsage:")
+        print("  python python_test_queries.py print          # Print all queries")
+        print("  python python_test_queries.py test           # Test RAG system")
+        print("  python python_test_queries.py random [count] # Get random queries")
+        print("  python python_test_queries.py beginner       # Get beginner queries")
+        print("  python python_test_queries.py intermediate   # Get intermediate queries")
+        print("  python python_test_queries.py advanced       # Get advanced queries")
+        print(f"\nTotal queries available: {len(ALL_QUERIES)}")

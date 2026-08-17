@@ -1,0 +1,383 @@
+# ============================================================================
+# .gitignore - Git Ignore File
+# ============================================================================
+# This file specifies which files and folders should NOT be committed to git
+# 
+# Add this file to your git repository to prevent committing:
+# - Sensitive data (.env files)
+# - Large files (node_modules, chroma_db)
+# - Temporary files
+# - Cache and build artifacts
+# ============================================================================
+
+# ============================================================================
+# ENVIRONMENT & CONFIGURATION
+# ============================================================================
+
+# Environment variables (NEVER commit API keys!)
+.env
+.env.local
+.env.*.local
+.env.backup
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+.AppleDouble
+.LSOverride
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C extensions
+*.c
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ============================================================================
+# NODE.JS / REACT
+# ============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+package-lock.json
+yarn.lock
+
+# Production
+dist/
+dist-ssr/
+*.local
+
+# Misc
+.turbo
+.vercel
+
+# ============================================================================
+# IDE & EDITOR
+# ============================================================================
+
+# VS Code
+.vscode/
+.vscode-test
+*.vsix
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+.vim/
+*.swp
+*.swo
+*~
+.netrwhist
+tags
+cscope*
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Nano
+.nano_history
+
+# ============================================================================
+# DOCUMENTATION & NOTES
+# ============================================================================
+
+# Markdown notes
+*.md.bak
+*.markdown.bak
+
+# Temporary documentation
+TODO.md
+NOTES.md
+temp_docs/
+
+# ============================================================================
+# DATA & VECTORS (Keep these locally, don't commit)
+# ============================================================================
+
+# Document files (IMPORTANT: Don't commit large document folders)
+documents/
+docs/
+data/
+raw_data/
+
+# Vector database (Don't commit - regenerate from documents)
+chroma_db/
+*.db
+*.sqlite
+*.sqlite3
+
+# Large files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# ============================================================================
+# BUILD & COMPILATION
+# ============================================================================
+
+# Build directories
+build/
+out/
+dist/
+.next/
+.nuxt/
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# BACKUP & TEMPORARY FILES
+# ============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# OS Specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ============================================================================
+# LOGS
+# ============================================================================
+
+# All log files
+*.log
+logs/
+log/
+
+# ============================================================================
+# SPECIFIC FILES TO EXCLUDE
+# ============================================================================
+
+# Never commit these:
+.env                           # API keys
+.env.local                     # Local environment
+.env.backup                    # Backup env
+chroma_db/                     # Vector database
+documents/                     # Document files
+__pycache__/                   # Python cache
+node_modules/                  # Node packages
+dist/                          # Build output
+.vscode/                       # IDE settings
+.idea/                         # IDE settings
+
+# ============================================================================
+# EXCEPTIONS (Things TO commit)
+# ============================================================================
+# Use ! to override ignore patterns if needed
+# Example:
+# !.env.example                # Keep this to show structure
+# !important_config.py         # Keep important config
+
+# .env.example file (if you have one)
+# !.env.example
+
+# ============================================================================
+# PROJECT SPECIFIC
+# ============================================================================
+
+# Chat logs (if storing locally)
+chat_logs/
+conversations/
+
+# Temporary test files
+test_output/
+test_results/
+*.test.log
+
+# API response cache
+api_cache/
+cache/
+
+# ============================================================================
+# INSTRUCTIONS
+# ============================================================================
+#
+# HOW TO USE THIS FILE:
+# 
+# 1. Save as .gitignore in your project root
+# 2. Make sure these folders/files are not committed:
+#    - documents/ (your document files)
+#    - .env (API keys)
+#    - __pycache__/ (Python cache)
+#    - node_modules/ (npm packages)
+#    - chroma_db/ (vector database)
+#    - .vscode/ / .idea/ (IDE settings)
+#
+# 3. Add to git:
+#    git add .gitignore
+#    git commit -m "Add .gitignore"
+#    git push
+#
+# 4. To remove already-committed files:
+#    git rm --cached .env
+#    git rm -r --cached __pycache__/
+#    git rm -r --cached documents/
+#    git commit -m "Remove sensitive files from git"
+#    git push
+#
+# ============================================================================
+# IMPORTANT REMINDERS
+# ============================================================================
+#
+# ⚠️  NEVER commit .env file with API keys!
+# ⚠️  NEVER commit large document folders!
+# ⚠️  NEVER commit node_modules/ (use package.json instead)
+# ⚠️  NEVER commit chroma_db/ (regenerate from documents)
+#
+# If you accidentally committed sensitive data:
+# 1. Rotate your API keys immediately
+# 2. Use: git filter-branch to remove from history
+# 3. Force push: git push --force
+#
+# For more info: https://git-scm.com/docs/gitignore
+#
+# ============================================================================
