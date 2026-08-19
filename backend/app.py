@@ -33,7 +33,8 @@ from flask_cors import CORS
 
 from huggingface_hub import InferenceClient
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance
 
 
 # ============================================================================
@@ -47,9 +48,9 @@ load_dotenv()
 # CONFIGURATION
 # ============================================================================
 
-CHROMA_PATH = "./chroma_db"
-
-COLLECTION_NAME = "all_documents"
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "all_documents")
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
@@ -62,7 +63,7 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 # CHECK REQUIRED FILES / VARIABLES
 # ============================================================================
 
-if not Path(CHROMA_PATH).exists():
+if not QDRANT_URL:
 
     print("❌ Error: chroma_db/ not found!")
 
@@ -167,21 +168,29 @@ print(
 
 try:
 
-    vector_store = Chroma(
-        persist_directory=CHROMA_PATH,
+    qdrant_client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY
+    )
 
-        collection_name=COLLECTION_NAME,
-
-        embedding_function=embeddings
+    # Check that the collection exists
+    collection_info = qdrant_client.get_collection(
+        collection_name=COLLECTION_NAME
     )
 
     print(" ✓")
+    print(
+        f"   ✓ Qdrant collection: {COLLECTION_NAME}"
+    )
+    print(
+        f"   ✓ Vectors: {collection_info.points_count}"
+    )
 
 except Exception as e:
 
     print(" ❌")
 
-    print(f"Error loading ChromaDB: {e}")
+    print(f"Error connecting to Qdrant: {e}")
 
     exit(1)
 
@@ -192,51 +201,21 @@ except Exception as e:
 
 try:
 
-    collection = vector_store._collection
+    collection_info = qdrant_client.get_collection(
+        collection_name=COLLECTION_NAME
+    )
 
-    total_chunks = collection.count()
+    total_chunks = collection_info.points_count
 
     print(
-        f"   ✓ Chunks in database: {total_chunks}"
+        f"   ✓ Vectors in Qdrant: {total_chunks}"
     )
 
 except Exception as e:
 
     print(
-        f"   ⚠️ Could not read collection count: {e}"
+        f"   ⚠️ Could not read Qdrant collection count: {e}"
     )
-
-
-# ============================================================================
-# CREATE RETRIEVER
-# ============================================================================
-
-print(
-    "Setting up retriever...",
-    end="",
-    flush=True
-)
-
-try:
-
-    retriever = vector_store.as_retriever(
-
-        search_type="similarity",
-
-        search_kwargs={
-            "k": 5
-        }
-    )
-
-    print(" ✓")
-
-except Exception as e:
-
-    print(" ❌")
-
-    print(f"Error creating retriever: {e}")
-
-    exit(1)
 
 
 # ============================================================================
@@ -296,6 +275,39 @@ def generate_answer(prompt_text):
     )
 
     return response.choices[0].message.content
+def retrieve_documents(question, k=5):
+
+    query_embedding = embeddings.embed_query(question)
+
+    results = qdrant_client.query_points(
+        collection_name=COLLECTION_NAME,
+        query=query_embedding,
+        limit=k,
+        with_payload=True
+    )
+
+    documents = []
+
+    for point in results.points:
+
+        payload = point.payload or {}
+
+        content = payload.get(
+            "document",
+            ""
+        )
+
+        metadata = payload.get(
+            "metadata",
+            {}
+        )
+
+        documents.append({
+            "content": content,
+            "metadata": metadata
+        })
+
+    return documents
 
 
 # ============================================================================
@@ -308,45 +320,41 @@ def ask_rag(question):
     # 1. RETRIEVE DOCUMENTS
     # --------------------------------------------------------
 
-    documents = retriever.invoke(question)
-
-
-    # --------------------------------------------------------
-    # 2. CHECK RETRIEVAL
-    # --------------------------------------------------------
+    documents = retrieve_documents(question)
 
     if not documents:
-
         return (
             "I could not find relevant information "
             "in the provided documents."
         )
 
-
-    # --------------------------------------------------------
-    # 3. BUILD CONTEXT
-    # --------------------------------------------------------
-
     context_parts = []
 
     for document in documents:
 
-        source = document.metadata.get(
+        metadata = document.get(
+            "metadata",
+            {}
+        )
+
+        source = metadata.get(
             "source",
             "Unknown source"
         )
 
-        content = document.page_content
+        content = document.get(
+            "content",
+            ""
+        )
 
         context_parts.append(
             f"Source: {source}\n"
             f"Content:\n{content}"
         )
 
-
-    context = "\n\n---\n\n".join(
-        context_parts
-    )
+        context = "\n\n---\n\n".join(
+            context_parts
+        )
 
 
     # --------------------------------------------------------
@@ -502,13 +510,13 @@ def chat():
 
 @app.route("/api/status", methods=["GET"])
 def status():
-
     try:
 
-        collection = vector_store._collection
+        collection_info = qdrant_client.get_collection(
+            collection_name=COLLECTION_NAME
+        )
 
-        count = collection.count()
-
+        count = collection_info.points_count
 
         return jsonify({
 
@@ -516,7 +524,7 @@ def status():
 
             "vectordb": {
 
-                "type": "ChromaDB",
+                "type": "Qdrant",
 
                 "collection": COLLECTION_NAME,
 
@@ -542,7 +550,6 @@ def status():
             "error": str(e)
 
         }), 500
-
 
 # ============================================================================
 # 404 HANDLER
@@ -603,7 +610,7 @@ if __name__ == "__main__":
     )
 
     print(
-        f"✓ ChromaDB: {CHROMA_PATH}"
+        f"✓ ChromaDB: {COLLECTION_NAME}"
     )
 
     print(
