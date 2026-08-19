@@ -1,866 +1,1689 @@
-# 🤖 AI Assistant - React Chatbot with Hugging Face Backend
+You can replace your existing README.md with this:
 
-A modern, production-ready interactive chatbot built with React and Flask, powered by Hugging Face API and Chroma vector database for RAG (Retrieval-Augmented Generation).
+# 🤖 RAG Chatbot
 
-![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react)
-![Flask](https://img.shields.io/badge/Flask-2.3.0-green?logo=flask)
-![Node.js](https://img.shields.io/badge/Node.js-16+-green?logo=node.js)
-![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
----
+A full-stack **Retrieval-Augmented Generation (RAG) Chatbot** that allows users to ask questions about a collection of documents and receive AI-generated answers based on the retrieved document context.
 
-## 📋 Table of Contents
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [API Endpoints](#api-endpoints)
-- [Troubleshooting](#troubleshooting)
-- [Customization](#customization)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+The project uses a **Next.js frontend**, **Flask backend**, **Qdrant Cloud vector database**, **Sentence Transformers embeddings**, and **Qwen 2.5 7B Instruct** through the Hugging Face Inference API.
+
 
 ---
 
-## ✨ Features
 
-### Frontend (React)
-- ✅ **Modern UI** - Clean, professional interface similar to ChatGPT
-- ✅ **Real-time Chat** - Instant messaging with typing indicators
-- ✅ **Responsive Design** - Works on desktop, tablet, and mobile
-- ✅ **Conversation History** - View full chat history
-- ✅ **Status Indicator** - Shows API connection status
-- ✅ **Clear History** - Button to reset conversation
-- ✅ **Message Timestamps** - Track when messages were sent
-- ✅ **Loading Animation** - Visual feedback while waiting for response
+## 🚀 Features
 
-### Backend (Flask + RAG)
-- ✅ **Hugging Face Integration** - Uses Hugging Face API for LLM
-- ✅ **Vector Database** - Chroma DB for fast document retrieval
-- ✅ **RAG System** - Retrieval-Augmented Generation for accurate answers
-- ✅ **CORS Enabled** - Secure communication between frontend and backend
-- ✅ **Error Handling** - Comprehensive error management
-- ✅ **Health Checks** - API status endpoints for monitoring
-- ✅ **System Status** - Check vector database and configuration
 
-### General
-- ✅ **Production Ready** - Professional code quality
-- ✅ **Easy Setup** - Simple installation and configuration
-- ✅ **Customizable** - Easy to modify colors, models, and behavior
-- ✅ **Well Documented** - Complete setup and usage guides
-- ✅ **Scalable** - Ready for deployment and scaling
+- 📄 Document-based question answering
+- 🔎 Semantic vector search
+- 🧠 Retrieval-Augmented Generation (RAG)
+- ⚡ Next.js frontend
+- 🐍 Flask REST API backend
+- ☁️ Qdrant Cloud vector database
+- 🤗 Hugging Face Inference API
+- 🧩 Qwen/Qwen2.5-7B-Instruct LLM
+- 🔤 Sentence Transformers embeddings
+- 🐳 Docker support
+- 🐳 Docker Compose support
+- 🌐 Ready for cloud deployment
+- 📊 API health and status endpoints
+
 
 ---
 
-## 🛠️ Tech Stack
 
-### Frontend
-- **React 18.2** - UI library
-- **Vite 5.0** - Fast build tool
-- **CSS3** - Modern styling with gradients and animations
+# 🏗️ System Architecture
 
-### Backend
-- **Flask 2.3** - Python web framework
-- **LangChain 0.0.300** - LLM orchestration framework
-- **Chroma 0.4** - Vector database for embeddings
-- **Hugging Face Hub** - LLM provider
 
-### Supporting
-- **Python 3.8+** - Backend runtime
-- **Node.js 16+** - Frontend runtime
-- **npm** - Package manager
-
----
-
-## 📦 Prerequisites
-
-### System Requirements
-- **Python 3.8** or higher
-- **Node.js 16** or higher (with npm 8+)
-- **4GB RAM** minimum (8GB recommended)
-- **2GB disk space**
-- **Internet connection** for Hugging Face API
-
-### API Keys
-- **Hugging Face API Key** - Get from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
-
-### Existing Files
-- **chroma_db/** - Vector database folder
-- **chat_rag.py** - Your RAG implementation
-- **.env** - Environment configuration file
-
-### Available Ports
-- **Port 3000** - React development server
-- **Port 5000** - Flask API server
-
----
-
-## 🚀 Quick Start
-
-### 1. Clone or Download Files
-
-```bash
-# Download all project files from outputs folder
-# Copy to your project directory
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install Python packages
-pip install -r requirements.txt
-
-# Install Node packages
-npm install
-```
-
-### 3. Configure Environment
-
-```bash
-# Create .env file with your API key
-echo "HUGGINGFACE_API_KEY=your_api_key_here" > .env
-```
-
-### 4. Start Backend (Terminal 1)
-
-```bash
-python app.py
-```
-
-Expected output:
-```
-✓ API starting on http://localhost:5000
-✓ RAG system loaded successfully
-```
-
-### 5. Start Frontend (Terminal 2)
-
-```bash
-npm run dev
-```
-
-Expected output:
-```
-✓ Local: http://localhost:3000/
-```
-
-### 6. Open in Browser
-
-Open your browser and go to: **http://localhost:3000**
-
-Start chatting! 🎉
-
----
-
-## 📁 Installation
-
-### Step 1: Download Files
-
-Download from outputs folder:
-```
-- app.py
-- package.json
-- index.html
-- vite.config.js
-- src/App.jsx
-- src/App.css
-- src/main.jsx
-- src/index.css
-- requirements.txt
-```
-
-### Step 2: Create Project Structure
-
-```bash
-your_project/
-├── app.py
-├── chat_rag.py (existing)
-├── package.json
-├── index.html
-├── vite.config.js
-├── requirements.txt
-├── .env
-├── chroma_db/ (existing)
-└── src/
-    ├── App.jsx
-    ├── App.css
-    ├── main.jsx
-    └── index.css
-```
-
-### Step 3: Install Python Packages
-
-```bash
-# Using requirements.txt
-pip install -r requirements.txt
-
-# Or manually
-pip install flask flask-cors langchain langchain-community langchain-huggingface chromadb huggingface-hub sentence-transformers pypdf python-dotenv requests
-```
-
-### Step 4: Install Node Packages
-
-```bash
-npm install
-```
-
-### Step 5: Set Environment Variables
-
-Create `.env` file:
-```
-HUGGINGFACE_API_KEY=your_api_key_here
-```
-
-### Step 6: Verify Installation
-
-```bash
-# Check Python
-python --version
-pip list | grep flask
-
-# Check Node
-node --version
-npm list
-```
-
----
-
-## 📂 Project Structure
-
-```
-your_project/
+```text
+                         USER
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │   Next.js Frontend│
+                 │      v0 UI        │
+                 └─────────┬─────────┘
+                           │
+                           │ POST /api/chat
+                           ▼
+                 ┌───────────────────┐
+                 │   Flask Backend   │
+                 │     REST API      │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Sentence Transformers   │
+              │ all-MiniLM-L6-v2        │
+              └────────────┬────────────┘
+                           │
+                    Query Embedding
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │   Qdrant Cloud    │
+                 │  Vector Database  │
+                 │                   │
+                 │  25,860 vectors   │
+                 └─────────┬─────────┘
+                           │
+                     Top 5 Chunks
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │ RAG Context       │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │ Hugging Face      │
+                 │ Qwen 2.5 7B       │
+                 │ Instruct           │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+                      AI Answer
+🛠️ Technologies Used
+Frontend
+Next.js
+React
+TypeScript
+Tailwind CSS
+Lucide React
+v0-generated UI
+Backend
+Python
+Flask
+Flask-CORS
+Gunicorn
+Python-dotenv
+AI / RAG
+Hugging Face
+Qwen/Qwen2.5-7B-Instruct
+Sentence Transformers
+sentence-transformers/all-MiniLM-L6-v2
+Vector Database
+Qdrant Cloud
+Development Database
+ChromaDB
+Containerization
+Docker
+Docker Compose
+WSL 2
+Docker Desktop
+Deployment
+GitHub
+Render
+Qdrant Cloud
+Hugging Face
+📂 Project Structure
+rag_project/
 │
-├── Backend (Flask)
-│   ├── app.py                    # Flask API wrapper (60 lines)
-│   ├── chat_rag.py               # Your RAG implementation (existing)
-│   ├── requirements.txt           # Python dependencies
-│   └── .env                      # API keys (private)
+├── backend/
+│   ├── .env
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── chat_rag.py
+│   ├── migrate_chroma_to_qdrant.py
+│   ├── requirements.txt
+│   │
+│   └── chroma_db/
+│       └── Local ChromaDB backup
 │
-├── Frontend (React)
-│   ├── package.json              # Node dependencies
-│   ├── index.html                # HTML entry point
-│   ├── vite.config.js            # Vite configuration
-│   ├── src/
-│   │   ├── main.jsx              # React entry point
-│   │   ├── App.jsx               # Main component (180 lines)
-│   │   ├── App.css               # Component styles (400 lines)
-│   │   └── index.css             # Global styles
+├── frontend/
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── app/
+│   ├── components/
+│   ├── lib/
 │   └── public/
-│       └── (static files)
 │
-├── Data
-│   ├── chroma_db/                # Vector database (existing)
-│   └── documents/                # Your documents (existing)
+├── documents/
+│   └── Source documents
 │
-└── Documentation
-    ├── README.md                 # This file
-    ├── requirements.txt          # Dependencies
-    └── REACT_SETUP_GUIDE.md      # Setup guide
-```
+├── chroma_db/
+│
+├── chroma_db_python/
+│
+├── create_embeddings.py
+├── create_embeddings_final.py
+├── create_sample_doc.py
+├── download_ai_papers.py
+├── download_python_resource.py
+├── load_document.py
+├── retriever.py
+├── store_vectors.py
+├── test_retrieval.py
+├── check_chroma.py
+│
+├── docker-compose.yml
+├── requirements.txt
+├── package.json
+├── package-lock.json
+├── README.md
+└── .gitignore
+🔄 RAG Workflow
 
----
+The chatbot follows the following workflow:
 
-## 💻 Usage
+User Question
+      │
+      ▼
+Generate Query Embedding
+      │
+      ▼
+Search Qdrant Cloud
+      │
+      ▼
+Retrieve Top 5 Relevant Chunks
+      │
+      ▼
+Build RAG Context
+      │
+      ▼
+Send Context + Question to Qwen
+      │
+      ▼
+Generate Answer
+      │
+      ▼
+Return Answer to Frontend
+🗃️ ChromaDB → Qdrant Migration
 
-### Starting the Chatbot
+During development, ChromaDB was initially used as the local vector database.
 
-**Terminal 1 - Start Backend:**
-```bash
+The original setup contained approximately:
+
+25,860 document chunks
+
+The embedding dimension was verified as:
+
+384
+
+The embedding model was:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+The original ChromaDB collection was:
+
+all_documents
+
+The existing vectors were migrated to Qdrant Cloud without regenerating the embeddings.
+
+After migration:
+
+Qdrant Collection: all_documents
+Vectors: 25,860
+Dimension: 384
+Distance: Cosine
+
+The migration script is:
+
+backend/migrate_chroma_to_qdrant.py
+☁️ Qdrant Cloud
+
+Qdrant is used as the production vector database.
+
+The application connects using:
+
+QDRANT_URL
+QDRANT_API_KEY
+QDRANT_COLLECTION
+
+The collection used by the project is:
+
+all_documents
+
+The application retrieves the top 5 most relevant document chunks for each question.
+
+🧠 Embedding Model
+
+The project uses:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+The embedding dimension is:
+
+384
+
+The same embedding model must be used when creating query embeddings because the Qdrant collection was created with 384-dimensional vectors.
+
+🤖 Language Model
+
+The project uses:
+
+Qwen/Qwen2.5-7B-Instruct
+
+The model is accessed through the Hugging Face Inference API.
+
+The Hugging Face token is stored as an environment variable.
+
+🔐 Environment Variables
+
+Create:
+
+backend/.env
+
+Example:
+
+HF_TOKEN=your_huggingface_token
+
+
+QDRANT_URL=https://your-qdrant-cluster-url
+
+
+QDRANT_API_KEY=your_qdrant_api_key
+
+
+QDRANT_COLLECTION=all_documents
+⚠️ Security
+
+Never commit .env to GitHub.
+
+The .gitignore should contain:
+
+.env
+backend/.env
+
+Never expose your:
+
+HF_TOKEN
+QDRANT_API_KEY
+
+in source code.
+
+🖥️ Local Development
+1. Clone the repository
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+
+Move into the project:
+
+cd rag_project
+🐍 Backend Setup
+
+Move into the backend:
+
+cd backend
+
+Create a virtual environment:
+
+Windows
+python -m venv venv
+
+Activate:
+
+venv\Scripts\activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Run the Flask backend:
+
 python app.py
-```
 
-**Terminal 2 - Start Frontend:**
-```bash
+Backend:
+
+http://localhost:5000
+🌐 Frontend Setup
+
+Open another terminal.
+
+Move into:
+
+cd frontend
+
+Install dependencies:
+
+npm install
+
+Run the development server:
+
 npm run dev
-```
 
-**Browser:**
-Open http://localhost:3000
+Frontend:
 
-### Using the Chatbot
+http://localhost:3000
+🔗 Frontend → Backend
 
-1. **Type a Question** - Ask anything about your documents
-2. **Wait for Response** - Bot retrieves from vector DB and generates answer
-3. **View History** - Click "History" to see past messages
-4. **Clear Chat** - Click 🗑️ button to reset conversation
-5. **Check Status** - Green indicator shows API connection
+The frontend communicates with:
 
-### Example Questions
+POST /api/chat
 
-```
-"What is machine learning?"
-"Explain deep learning in simple terms"
-"What are neural networks?"
-"How does transformer architecture work?"
-```
+The frontend API URL is configured using:
 
----
+NEXT_PUBLIC_API_URL=http://localhost:5000
 
-## ⚙️ Configuration
+The frontend sends:
 
-### Backend Configuration
-
-Edit `app.py` to customize:
-
-**Change LLM Model:**
-```python
-llm = HuggingFaceHub(
-    repo_id="mistralai/Mistral-7B-Instruct-v0.1",  # Change this
-    model_kwargs={"temperature": 0.7, "max_length": 512}
-)
-```
-
-**Available Models:**
-- `mistralai/Mistral-7B-Instruct-v0.1` (Fast, good)
-- `meta-llama/Llama-2-7b-chat-hf` (Quality)
-- `tiiuae/falcon-7b-instruct` (Very fast)
-
-**Change Embeddings:**
-```python
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
-```
-
-**Change Vector DB Parameters:**
-```python
-retriever = vector_store.as_retriever(
-    search_type="similarity",
-    search_kwargs={"k": 3}  # Number of documents to retrieve
-)
-```
-
-### Frontend Configuration
-
-Edit `src/App.css` to customize:
-
-**Change Color Scheme:**
-```css
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-```
-
-**Change Header Color:**
-```css
-.header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+{
+  "message": "Your question"
 }
-```
 
-**Change Button Style:**
-```css
-.send-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-```
+The backend returns the generated RAG response.
 
-### Environment Variables
+🔌 API Endpoints
+Health Check
+GET /api/health
 
-Create `.env` file:
+Example:
 
-```env
-# Required
-HUGGINGFACE_API_KEY=hf_your_api_key_here
+http://localhost:5000/api/health
 
-# Optional
-FLASK_ENV=development
-FLASK_DEBUG=True
-```
+Response:
 
----
-
-## 🔌 API Endpoints
-
-### Health Check
-
-**GET** `/api/health`
-
-Check if backend is running.
-
-```bash
-curl http://localhost:5000/api/health
-```
-
-**Response:**
-```json
 {
   "status": "ok",
   "message": "RAG API is running",
-  "using": "Hugging Face API"
+  "using": "Hugging Face Inference API"
 }
-```
+RAG Chat
+POST /api/chat
 
-### Chat Endpoint
+Request:
 
-**POST** `/api/chat`
-
-Send a message and get response.
-
-```bash
-curl -X POST http://localhost:5000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "What is AI?"}'
-```
-
-**Request:**
-```json
 {
-  "message": "Your question here"
+  "message": "What is RAG?"
 }
-```
 
-**Response:**
-```json
+Response:
+
 {
   "success": true,
-  "response": "AI stands for Artificial Intelligence...",
-  "message": "What is AI?"
+  "response": "Generated answer..."
 }
-```
+System Status
+GET /api/status
 
-### System Status
+Example response:
 
-**GET** `/api/status`
-
-Get system information.
-
-```bash
-curl http://localhost:5000/api/status
-```
-
-**Response:**
-```json
 {
   "status": "ready",
   "vectordb": {
-    "type": "Chroma",
-    "documents": 245
+    "type": "Qdrant",
+    "collection": "all_documents",
+    "chunks": 25860
   },
-  "embeddings": "Hugging Face (all-MiniLM-L6-v2)",
-  "llm": "Mistral-7B-Instruct-v0.1",
+  "embeddings": "sentence-transformers/all-MiniLM-L6-v2",
+  "llm": "Qwen/Qwen2.5-7B-Instruct",
   "api": "Hugging Face"
 }
-```
+🐳 Docker Setup
+
+The project supports Docker for running the frontend and backend.
+
+Backend Dockerfile
+
+The backend Docker image contains:
+
+Python
+Flask
+Gunicorn
+Qdrant Client
+Hugging Face dependencies
+Sentence Transformers
+PyTorch
+Transformers
+
+The production backend does not copy the local ChromaDB into the image.
+
+Qdrant Cloud is used instead.
+
+🐳 Docker Compose
+
+The entire application can be started using:
+
+docker compose up --build
+
+The services are:
+
+Frontend → localhost:3000
+
+
+Backend → localhost:5000
+
+Stop the containers:
+
+docker compose down
+🧪 Docker Testing
+
+Check running containers:
+
+docker ps
+
+Check backend:
+
+http://localhost:5000/api/status
+
+Expected:
+
+status: ready
+vectordb: Qdrant
+chunks: 25860
+
+Check frontend:
+
+http://localhost:3000
+
+Ask a question and verify that the RAG response is returned.
+
+📦 Docker Architecture
+Docker Compose
+│
+├── Frontend Container
+│     └── Next.js
+│
+└── Backend Container
+      ├── Flask
+      ├── Qdrant Client
+      ├── Sentence Transformers
+      ├── Hugging Face
+      └── Qwen
+             │
+             ▼
+        Qdrant Cloud
+🐳 WSL 2 + Docker Desktop
+
+The project was tested using:
+
+Windows
+WSL 2
+Ubuntu
+Docker Desktop
+
+Docker was verified using:
+
+docker --version
+
+and:
+
+docker run hello-world
+
+Docker Compose was then used to run the RAG application.
+
+📤 GitHub
+
+Before pushing the project, make sure sensitive and generated files are ignored.
+
+Recommended .gitignore entries:
+
+# Environment variables
+.env
+backend/.env
+
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+
+# Node
+node_modules/
+frontend/node_modules/
+
+
+# Next.js
+.next/
+frontend/.next/
+
+
+# Local vector database
+backend/chroma_db/
+chroma_db/
+chroma_db_python/
+
+
+# Logs
+*.log
+
+
+# OS
+.DS_Store
+Thumbs.db
+
+Check ignored files:
+
+git check-ignore -v backend/.env backend/chroma_db
+
+Check status:
+
+git status
+
+Add files:
+
+git add .
+
+Commit:
+
+git commit -m "Dockerize RAG chatbot with Qdrant"
+
+Push:
+
+git push origin main
+☁️ Deployment
+
+The recommended deployment architecture is:
+
+                    Internet
+                       │
+                       ▼
+              ┌────────────────┐
+              │ Next.js Frontend│
+              │     Render      │
+              └───────┬────────┘
+                      │
+                      ▼
+              ┌────────────────┐
+              │  Flask Backend │
+              │     Render      │
+              └───────┬────────┘
+                      │
+              ┌───────┴────────┐
+              ▼                ▼
+        Qdrant Cloud      Hugging Face
+        Vector Database       Qwen
+
+The frontend and backend can remain in the same GitHub repository while being deployed as separate Render services.
+
+🚀 Render Backend
+
+Create a Render Web Service using the same GitHub repository.
+
+Backend root directory:
+
+backend
+
+Dockerfile:
+
+backend/Dockerfile
+
+The backend requires these environment variables:
+
+HF_TOKEN
+QDRANT_URL
+QDRANT_API_KEY
+QDRANT_COLLECTION
+
+Set:
+
+QDRANT_COLLECTION=all_documents
+
+The backend should connect directly to Qdrant Cloud.
+
+🚀 Render Frontend
+
+Create another Render service using the same GitHub repository.
+
+Frontend root directory:
+
+frontend
+
+Dockerfile:
+
+frontend/Dockerfile
+
+Set the frontend environment variable:
+
+NEXT_PUBLIC_API_URL=https://YOUR-BACKEND-URL
+
+The frontend will then communicate with:
+
+https://YOUR-BACKEND-URL/api/chat
+💾 Why Qdrant Instead of Render Persistent Disk?
+
+The original local ChromaDB was approximately:
+
+234 MB
+
+Render's default filesystem is not persistent across deployments/restarts.
+
+A Render Persistent Disk requires a paid service.
+
+Therefore, the project was migrated to Qdrant Cloud so that the vector database remains externally accessible from the deployed Flask backend.
+
+🔄 Migration Process
+
+The migration was performed as follows:
+
+Local ChromaDB
+       │
+       │
+       ▼
+Collection: all_documents
+       │
+       │ 25,860 vectors
+       │ 384 dimensions
+       ▼
+Migration Script
+       │
+       ▼
+Qdrant Cloud
+       │
+       ▼
+Migration Verified
+
+The migration was verified with:
+
+ChromaDB vectors: 25,860
+
+
+Qdrant vectors: 25,860
+
+The local ChromaDB should be kept as a backup until production deployment has been completely verified.
+
+🧰 Troubleshooting
+Docker Compose configuration not found
+
+Error:
+
+no configuration file provided
+
+Make sure you are in the project root:
+
+rag_project/
+
+and that:
+
+docker-compose.yml
+
+exists.
+
+Run:
+
+docker compose up --build
+Docker requirements hash error
+
+Error:
+
+THESE PACKAGES DO NOT MATCH THE HASHES
+
+This can occur when using a requirements file containing package hashes that don't match the downloaded Linux package.
+
+Use a clean backend requirements.txt without hash-pinned package entries.
+
+Frontend JSON error
+
+Error:
+
+Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+
+This usually means the frontend received an HTML response instead of the Flask JSON API response.
+
+Check:
+
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+and make sure the frontend calls:
+
+/api/chat
+
+Restart Next.js after changing environment variables.
+
+Qdrant connection error
+
+Check:
+
+QDRANT_URL=...
+QDRANT_API_KEY=...
+QDRANT_COLLECTION=all_documents
+
+Make sure the API key is valid and the Qdrant cluster is available.
+
+Qdrant vector count
+
+Check:
+
+/api/status
+
+Expected:
+
+Qdrant
+25,860 chunks
+🔒 Security
+
+Never commit:
+
+.env
+backend/.env
+QDRANT_API_KEY
+HF_TOKEN
+
+API keys should always be stored using environment variables.
+
+For production deployments, add secrets through the deployment platform's environment variable settings.
+
+📈 Current Project Status
+Frontend                  ✅
+Next.js                   ✅
+v0 UI                     ✅
+
+
+Flask Backend             ✅
+REST API                  ✅
+
+
+Local ChromaDB            ✅ Development/Backup
+Qdrant Cloud              ✅ Production Vector DB
+
+
+Vectors                   ✅ 25,860
+Embedding Dimension       ✅ 384
+
+
+Embedding Model           ✅ all-MiniLM-L6-v2
+LLM                       ✅ Qwen 2.5 7B Instruct
+Hugging Face API          ✅
+
+
+Docker                    ✅
+Docker Compose            ✅
+WSL 2                     ✅
+Docker Desktop            ✅
+
+
+Local Docker Testing      ✅
+Qdrant Migration          ✅
+🎯 Future Improvements
+
+Possible future improvements include:
+
+📄 Upload documents directly from the frontend
+🔄 Automatic document ingestion
+🗂️ Document management
+👤 User authentication
+💬 Conversation history
+📌 Source citations in answers
+📊 RAG analytics
+⚡ Streaming AI responses
+🧠 Improved retrieval strategies
+🔎 Hybrid search
+📱 Mobile responsive improvements
+☁️ Production deployment
+📈 Monitoring and logging
+👨‍💻 Author
+
+Subash V
+
+Bachelor of Computer Science and Engineering
+
+RVS Technical Campus, Coimbatore
+
+⭐ Project Summary
+
+This project demonstrates a complete Retrieval-Augmented Generation architecture by combining semantic search with a large language model.
+
+The system retrieves relevant information from a vector database and provides that context to Qwen before generating an answer.
+
+The final architecture uses:
+
+Next.js
+   +
+Flask
+   +
+Qdrant Cloud
+   +
+Sentence Transformers
+   +
+Hugging Face
+   +
+Qwen 2.5
+   +
+Docker
+
+This provides a scalable foundation for building a document-based AI chatbot.
+
+
+
+### One important thing before you replace your README
+
+
+Your repository currently has a **root `requirements.txt`** as well as `backend/requirements.txt`. For the Docker deployment, the important one is:
+
+
+```text
+backend/requirements.txt
+
+Also, keep backend/chroma_db/ locally as your backup, but don't commit it to GitHub now that Qdrant contains your 25,860 vectors.
+
+give me this as per i copied and paste in github
+
+Yes. 👍 Below is a clean GitHub-ready README.md. Copy everything inside the code block and paste it directly into your repository's README.md.
+
+# 🤖 RAG Chatbot
+
+
+A full-stack **Retrieval-Augmented Generation (RAG) Chatbot** that allows users to ask questions about documents and receive AI-generated answers based on relevant document content.
+
+
+The project uses **Next.js** for the frontend, **Flask** for the backend, **Qdrant Cloud** for vector search, **Sentence Transformers** for embeddings, and **Qwen 2.5 7B Instruct** through the Hugging Face API.
+
 
 ---
 
-## 🐛 Troubleshooting
 
-### Backend Issues
+## 🚀 Features
 
-#### "API not connected" in Frontend
-**Problem:** Backend not running
-**Solution:**
-```bash
-# Terminal 1: Start backend
+
+- 📄 Document-based question answering
+- 🔎 Semantic vector search
+- 🧠 Retrieval-Augmented Generation (RAG)
+- ⚡ Next.js frontend
+- 🐍 Flask REST API backend
+- ☁️ Qdrant Cloud vector database
+- 🤗 Hugging Face Inference API
+- 🧩 Qwen/Qwen2.5-7B-Instruct
+- 🔤 Sentence Transformers embeddings
+- 🐳 Docker support
+- 🐳 Docker Compose support
+- 🌐 Cloud deployment ready
+- 📊 API health and status endpoints
+
+
+---
+
+
+## 🏗️ System Architecture
+
+
+```text
+                         USER
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │   Next.js Frontend│
+                 │      v0 UI        │
+                 └─────────┬─────────┘
+                           │
+                           │ POST /api/chat
+                           ▼
+                 ┌───────────────────┐
+                 │   Flask Backend   │
+                 │     REST API      │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │ Sentence Transformers   │
+              │ all-MiniLM-L6-v2        │
+              └────────────┬────────────┘
+                           │
+                    Query Embedding
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │   Qdrant Cloud    │
+                 │  Vector Database  │
+                 │                   │
+                 │  25,860 vectors   │
+                 └─────────┬─────────┘
+                           │
+                     Top 5 Chunks
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │    RAG Context    │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+                 ┌───────────────────┐
+                 │   Hugging Face    │
+                 │   Qwen 2.5 7B    │
+                 │     Instruct      │
+                 └─────────┬─────────┘
+                           │
+                           ▼
+                      AI Answer
+🛠️ Technologies Used
+Frontend
+Next.js
+React
+TypeScript
+Tailwind CSS
+Lucide React
+v0-generated UI
+Backend
+Python
+Flask
+Flask-CORS
+Gunicorn
+Python-dotenv
+AI / RAG
+Hugging Face
+Qwen/Qwen2.5-7B-Instruct
+Sentence Transformers
+sentence-transformers/all-MiniLM-L6-v2
+Vector Database
+Qdrant Cloud
+Development Database
+ChromaDB
+Containerization
+Docker
+Docker Compose
+WSL 2
+Docker Desktop
+Deployment
+GitHub
+Render
+Qdrant Cloud
+Hugging Face
+📂 Project Structure
+rag_project/
+│
+├── backend/
+│   ├── .dockerignore
+│   ├── .env
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── chat_rag.py
+│   ├── migrate_chroma_to_qdrant.py
+│   ├── requirements.txt
+│   │
+│   └── chroma_db/
+│       └── Local ChromaDB backup
+│
+├── frontend/
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   └── public/
+│
+├── documents/
+│   └── Source documents
+│
+├── create_embeddings.py
+├── create_embeddings_final.py
+├── create_sample_doc.py
+├── download_ai_papers.py
+├── download_python_resource.py
+├── load_document.py
+├── retriever.py
+├── store_vectors.py
+├── test_retrieval.py
+├── check_chroma.py
+│
+├── docker-compose.yml
+├── README.md
+└── .gitignore
+
+Note: .env, chroma_db, node_modules, .next, and other sensitive/generated files should not be committed to GitHub.
+
+🔄 RAG Workflow
+
+The chatbot follows this workflow:
+
+User Question
+      │
+      ▼
+Generate Query Embedding
+      │
+      ▼
+Search Qdrant Cloud
+      │
+      ▼
+Retrieve Top 5 Relevant Chunks
+      │
+      ▼
+Build RAG Context
+      │
+      ▼
+Send Context + Question to Qwen
+      │
+      ▼
+Generate Answer
+      │
+      ▼
+Return Answer to Frontend
+🗃️ ChromaDB → Qdrant Migration
+
+During development, ChromaDB was initially used as the local vector database.
+
+The existing ChromaDB contained:
+
+25,860 document chunks
+384-dimensional embeddings
+Collection: all_documents
+
+The embedding model used was:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+The existing vectors were migrated to Qdrant Cloud without regenerating the embeddings.
+
+After migration:
+
+Qdrant Collection: all_documents
+Vectors: 25,860
+Embedding Dimension: 384
+Distance: Cosine
+
+The migration script is:
+
+backend/migrate_chroma_to_qdrant.py
+
+The original ChromaDB is kept locally as a backup.
+
+☁️ Qdrant Cloud
+
+Qdrant Cloud is used as the production vector database.
+
+The application connects using:
+
+QDRANT_URL
+QDRANT_API_KEY
+QDRANT_COLLECTION
+
+The collection used by the project is:
+
+all_documents
+
+For every user question, the application creates a query embedding and retrieves the top 5 relevant document chunks from Qdrant.
+
+🧠 Embedding Model
+
+The project uses:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+Embedding dimension:
+
+384
+
+The same embedding model is used for both document embeddings and query embeddings.
+
+🤖 Language Model
+
+The project uses:
+
+Qwen/Qwen2.5-7B-Instruct
+
+The model is accessed through the Hugging Face Inference API.
+
+🔐 Environment Variables
+
+Create the following file for local development:
+
+backend/.env
+
+Example:
+
+HF_TOKEN=your_huggingface_token
+
+
+QDRANT_URL=https://your-qdrant-cluster-url
+
+
+QDRANT_API_KEY=your_qdrant_api_key
+
+
+QDRANT_COLLECTION=all_documents
+
+For the frontend:
+
+frontend/.env.local
+
+Example:
+
+NEXT_PUBLIC_API_URL=http://localhost:5000
+⚠️ Security
+
+Never commit .env or .env.local to GitHub.
+
+Never expose:
+
+HF_TOKEN
+QDRANT_API_KEY
+
+in your source code.
+
+For production, add these values through the deployment platform's environment-variable settings.
+
+🖥️ Local Development
+1. Clone the Repository
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+
+Move into the project:
+
+cd rag_project
+🐍 Backend Setup
+
+Move into the backend directory:
+
+cd backend
+
+Create a Python virtual environment:
+
+Windows
+python -m venv venv
+
+Activate it:
+
+venv\Scripts\activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Run the backend:
+
 python app.py
 
-# Verify it's running
-curl http://localhost:5000/api/health
-```
+Backend:
 
-#### "ModuleNotFoundError: No module named 'flask'"
-**Problem:** Python packages not installed
-**Solution:**
-```bash
-pip install -r requirements.txt
-```
+http://localhost:5000
+🌐 Frontend Setup
 
-#### "Port 5000 already in use"
-**Problem:** Another process using the port
-**Solution:**
-```bash
-# Windows
-netstat -ano | findstr :5000
-taskkill /PID <PID> /F
+Open another terminal.
 
-# macOS/Linux
-lsof -i :5000
-kill -9 <PID>
-```
+Move into the frontend:
 
-#### "HUGGINGFACE_API_KEY not found"
-**Problem:** Missing environment variable
-**Solution:**
-```bash
-# Check .env file
-cat .env
+cd frontend
 
-# Should have:
-# HUGGINGFACE_API_KEY=hf_your_key
+Install dependencies:
 
-# Recreate if missing
-echo "HUGGINGFACE_API_KEY=your_key" > .env
-```
-
-#### "chroma_db not found"
-**Problem:** Vector database doesn't exist
-**Solution:**
-```bash
-# Check if chroma_db folder exists
-ls chroma_db/
-
-# If not, create it with your embedding script
-python create_embeddings.py
-```
-
-### Frontend Issues
-
-#### "npm not found"
-**Problem:** Node.js not installed
-**Solution:**
-```bash
-# Install Node.js from https://nodejs.org/
-node --version  # Should be 16+
-npm --version   # Should be 8+
-```
-
-#### "Port 3000 already in use"
-**Problem:** Another process using the port
-**Solution:**
-```bash
-# Kill process on port 3000
-lsof -i :3000
-kill -9 <PID>
-
-# Or change port in vite.config.js
-```
-
-#### "React won't load in browser"
-**Problem:** Frontend not started or build failed
-**Solution:**
-```bash
-# Make sure npm install ran
 npm install
 
-# Check if frontend is running
+Start the development server:
+
 npm run dev
 
-# Check browser console for errors (F12)
-# Hard refresh browser (Ctrl+Shift+R)
-```
+Frontend:
 
-### General Issues
+http://localhost:3000
+🔗 Frontend → Backend
 
-#### "Chatbot gives error responses"
-**Problem:** RAG chain not working properly
-**Solution:**
-```bash
-# Test your chat_rag.py directly
-python chat_rag.py
+The frontend communicates with the Flask API.
 
-# Check vector database has documents
-curl http://localhost:5000/api/status
+The API URL is configured using:
 
-# Check Hugging Face API key is valid
-```
+NEXT_PUBLIC_API_URL=http://localhost:5000
 
-#### "Slow responses"
-**Problem:** Large model or network issue
-**Solution:**
-- Change to faster model (see Configuration)
-- Check internet connection
-- Check Hugging Face API status
-- Reduce number of documents to retrieve (change `k` in app.py)
+The chatbot sends requests to:
 
----
+POST /api/chat
 
-## 🎨 Customization
+Example request:
 
-### Change UI Colors
+{
+  "message": "What is RAG?"
+}
+🔌 API Endpoints
+Health Check
+GET /api/health
 
-Edit `src/App.css`:
+Example:
 
-```css
-/* Change primary color */
-background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
-```
+http://localhost:5000/api/health
 
-### Change LLM Model
+Response:
 
-Edit `app.py`:
+{
+  "status": "ok",
+  "message": "RAG API is running",
+  "using": "Hugging Face Inference API"
+}
+RAG Chat
+POST /api/chat
 
-```python
-# Fast and good quality
-repo_id="mistralai/Mistral-7B-Instruct-v0.1"
+Request:
 
-# Better quality but slower
-repo_id="meta-llama/Llama-2-7b-chat-hf"
+{
+  "message": "What is RAG?"
+}
 
-# Very fast
-repo_id="tiiuae/falcon-7b-instruct"
-```
+Response:
 
-### Change Embeddings Model
+{
+  "success": true,
+  "response": "Generated answer..."
+}
+System Status
+GET /api/status
 
-Edit `app.py`:
+Example:
 
-```python
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-mpnet-base-v2"  # Better but slower
-)
-```
+http://localhost:5000/api/status
 
-### Adjust Number of Retrieved Documents
+Expected response:
 
-Edit `app.py`:
+{
+  "status": "ready",
+  "vectordb": {
+    "type": "Qdrant",
+    "collection": "all_documents",
+    "chunks": 25860
+  },
+  "embeddings": "sentence-transformers/all-MiniLM-L6-v2",
+  "llm": "Qwen/Qwen2.5-7B-Instruct",
+  "api": "Hugging Face"
+}
+🐳 Docker Setup
 
-```python
-retriever = vector_store.as_retriever(
-    search_type="similarity",
-    search_kwargs={"k": 5}  # Increase for more context
-)
-```
+The project supports Docker for running the frontend and backend.
 
-### Modify Chatbot Prompt
+Backend Docker
 
-Edit `app.py` template:
+The backend Docker image contains:
 
-```python
-template = """You are a helpful AI assistant. Answer questions based on the provided context.
+Python
+Flask
+Gunicorn
+Qdrant Client
+Hugging Face dependencies
+Sentence Transformers
+PyTorch
+Transformers
 
-Context:
-{context}
+The production Docker image does not copy the local ChromaDB.
 
-Question: {question}
+Qdrant Cloud is used as the vector database.
 
-Answer:"""
-```
+🐳 Docker Compose
 
-### Add Custom Header Text
+The complete application can be started with:
 
-Edit `src/App.jsx`:
+docker compose up --build
 
-```jsx
-<h1>My Custom Chatbot 🤖</h1>
-```
+Services:
 
----
+Frontend → http://localhost:3000
 
-## 🚀 Deployment
 
-### Deploy Backend (Flask)
+Backend → http://localhost:5000
 
-#### Option 1: Heroku
+Stop the containers:
 
-```bash
-# Create Procfile
-echo "web: gunicorn app:app" > Procfile
+docker compose down
+🧪 Docker Testing
 
-# Create runtime.txt
-echo "python-3.9.16" > runtime.txt
+Check running containers:
 
-# Deploy
-heroku create your-app-name
-git push heroku main
-```
+docker ps
 
-#### Option 2: Railway
+Check backend status:
 
-```bash
-# Connect to Railway
-railway link
+http://localhost:5000/api/status
 
-# Deploy
-railway up
-```
+Expected:
 
-#### Option 3: Render
+Status: ready
+Vector DB: Qdrant
+Collection: all_documents
+Chunks: 25860
 
-1. Connect GitHub repo
-2. Create new Web Service
-3. Set Environment Variables
-4. Deploy
+Check the frontend:
 
-### Deploy Frontend (React)
+http://localhost:3000
 
-#### Option 1: Vercel
+Ask a question related to your documents and verify the generated answer.
 
-```bash
-# Install Vercel CLI
-npm i -g vercel
+🐳 Docker Architecture
+                 Docker Compose
+                       │
+             ┌─────────┴─────────┐
+             │                   │
+             ▼                   ▼
+       Frontend Container   Backend Container
+             │                   │
+          Next.js              Flask
+                                 │
+                                 ▼
+                            Qdrant Cloud
+                                 │
+                                 ▼
+                            Hugging Face
+                                 │
+                                 ▼
+                               Qwen
+🖥️ WSL 2 + Docker Desktop
 
-# Deploy
-vercel
-```
+The project was developed and tested using:
 
-#### Option 2: Netlify
+Windows
+WSL 2
+Ubuntu
+Docker Desktop
 
-```bash
-# Build
-npm run build
+Docker installation was verified using:
 
-# Deploy using Netlify CLI or drag dist/ folder
-netlify deploy --prod --dir=dist
-```
+docker --version
 
-#### Option 3: GitHub Pages
+and:
 
-```bash
-# Add to package.json
-"homepage": "https://yourusername.github.io/chatbot",
+docker run hello-world
 
-# Build and deploy
-npm run build
-npm install gh-pages --save-dev
-```
+Docker Compose was then used to run the complete RAG application.
 
----
+📤 GitHub
 
-## 🤝 Contributing
+Before pushing the project, make sure sensitive and generated files are ignored.
 
-Contributions are welcome! Please follow these steps:
+Recommended .gitignore:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+# Environment variables
+.env
+backend/.env
+frontend/.env.local
 
-### Code Style
 
-- Follow PEP 8 for Python
-- Use 2 spaces for JavaScript/CSS
-- Add comments for complex logic
-- Write meaningful commit messages
+# Python
+__pycache__/
+*.pyc
+venv/
 
----
 
-## 📄 License
+# Node
+node_modules/
+frontend/node_modules/
 
-This project is licensed under the MIT License - see the LICENSE file for details.
 
----
+# Next.js
+.next/
+frontend/.next/
 
-## 📞 Support
 
-For issues and questions:
+# Local ChromaDB
+backend/chroma_db/
+chroma_db/
+chroma_db_python/
 
-1. Check the **Troubleshooting** section
-2. Read **REACT_SETUP_GUIDE.md**
-3. Check **requirements.txt** and **REQUIREMENTS_COMPLETE.txt**
-4. Open an issue on GitHub
 
----
+# Logs
+*.log
 
-## 🎯 Project Status
 
-- ✅ Beta Version
-- ✅ Production Ready
-- ✅ Actively Maintained
-- ⚠️ Python 3.8+ Required
-- ⚠️ Node.js 16+ Required
+# OS
+.DS_Store
+Thumbs.db
 
----
+Check ignored files:
 
-## 🙏 Acknowledgments
+git check-ignore -v backend/.env backend/chroma_db
 
-- [React](https://react.dev/) - UI library
-- [Vite](https://vitejs.dev/) - Build tool
-- [Flask](https://flask.palletsprojects.com/) - Web framework
-- [LangChain](https://www.langchain.com/) - LLM orchestration
-- [Chroma](https://www.trychroma.com/) - Vector database
-- [Hugging Face](https://huggingface.co/) - LLM provider
+Check Git status:
 
----
+git status
 
-## 📈 Roadmap
+Add files:
 
-### Upcoming Features
-- [ ] Dark mode toggle
-- [ ] Multi-language support
-- [ ] Voice input/output
-- [ ] Document upload UI
-- [ ] Chat export (PDF/JSON)
-- [ ] Advanced search filters
-- [ ] User authentication
-- [ ] Rate limiting
-- [ ] Analytics dashboard
+git add .
 
-### Performance Improvements
-- [ ] Response caching
-- [ ] Lazy loading
-- [ ] Code splitting
-- [ ] Database optimization
+Commit:
 
----
+git commit -m "Dockerize RAG chatbot with Qdrant"
 
-## 🔐 Security
+Push:
 
-- ✅ Environment variables for API keys
-- ✅ CORS enabled for secure communication
-- ✅ Input validation
-- ✅ Error handling
-- ✅ No sensitive data in logs
+git push origin main
+☁️ Deployment Architecture
 
-### Best Practices
+The recommended production architecture is:
 
-1. Never commit `.env` file
-2. Use environment variables for secrets
-3. Keep dependencies updated
-4. Validate all user inputs
-5. Use HTTPS in production
+                         Internet
+                            │
+                            ▼
+                   ┌─────────────────┐
+                   │ Next.js Frontend│
+                   │     Render      │
+                   └────────┬────────┘
+                            │
+                            ▼
+                   ┌─────────────────┐
+                   │  Flask Backend  │
+                   │     Render      │
+                   └────────┬────────┘
+                            │
+                    ┌───────┴────────┐
+                    ▼                ▼
+              Qdrant Cloud      Hugging Face
+              Vector Database        Qwen
 
----
+The frontend and backend can remain in the same GitHub repository while being deployed as separate Render services.
 
-## 📊 Performance
+🚀 Render Backend Deployment
 
-### Benchmarks
+Create a Render Web Service using the GitHub repository.
 
-| Metric | Value |
-|--------|-------|
-| First Load | ~2s |
-| API Response | 2-5s |
-| Message Retrieval | <500ms |
-| Vector Search | <100ms |
-| Bundle Size | ~150KB |
+Backend root directory:
 
-### Optimization Tips
+backend
 
-1. Reduce number of documents retrieved (k parameter)
-2. Use faster LLM model
-3. Enable response caching
-4. Optimize vector database size
-5. Use CDN for frontend assets
+Dockerfile:
 
----
+backend/Dockerfile
 
-## 🎓 Learning Resources
+Add the following environment variables in Render:
 
-- [React Documentation](https://react.dev/)
-- [Vite Guide](https://vitejs.dev/guide/)
-- [Flask Tutorial](https://flask.palletsprojects.com/)
-- [LangChain Docs](https://python.langchain.com/)
-- [Hugging Face Guide](https://huggingface.co/docs)
+HF_TOKEN
+QDRANT_URL
+QDRANT_API_KEY
+QDRANT_COLLECTION
 
----
+Set:
 
-## 📞 Contact
+QDRANT_COLLECTION=all_documents
 
-- **Author**: Your Name
-- **Email**: your.email@example.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
+The backend connects directly to Qdrant Cloud.
 
----
+🚀 Render Frontend Deployment
 
-## ⭐ Star This Project
+Create another Render service using the same GitHub repository.
 
-If you find this useful, please star the repository! ⭐
+Frontend root directory:
 
----
+frontend
 
-**Last Updated**: August 2026  
-**Version**: 1.0.0  
-**Status**: ✅ Production Ready
+Dockerfile:
 
----
+frontend/Dockerfile
 
-## 🎉 Thank You!
+Set:
 
-Thank you for using this chatbot! Happy building! 🚀✨
+NEXT_PUBLIC_API_URL=https://YOUR-BACKEND-URL
+
+The frontend will communicate with:
+
+https://YOUR-BACKEND-URL/api/chat
+💾 Why Qdrant Instead of Render Persistent Disk?
+
+The original local ChromaDB was approximately:
+
+234 MB
+
+Render's default filesystem is ephemeral.
+
+A Render Persistent Disk requires a paid service.
+
+Therefore, the project was migrated to Qdrant Cloud so the vector database can be accessed remotely by the deployed Flask backend.
+
+🔄 Complete Migration Process
+
+The vector database migration was performed as follows:
+
+Local ChromaDB
+       │
+       ▼
+Collection: all_documents
+       │
+       ▼
+25,860 vectors
+       │
+       ▼
+384-dimensional embeddings
+       │
+       ▼
+Migration Script
+       │
+       ▼
+Qdrant Cloud
+       │
+       ▼
+Migration Verified
+
+Migration result:
+
+ChromaDB vectors: 25,860
+Qdrant vectors:   25,860
+
+The local ChromaDB is kept as a backup.
+
+🧰 Troubleshooting
+Docker Compose Configuration Not Found
+
+Error:
+
+no configuration file provided
+
+Make sure you are in the project root:
+
+rag_project/
+
+and that this file exists:
+
+docker-compose.yml
+
+Run:
+
+docker compose up --build
+Docker Requirements Hash Error
+
+Error:
+
+THESE PACKAGES DO NOT MATCH THE HASHES
+
+This occurs when the requirements file contains package hashes that don't match the downloaded package.
+
+Use a clean backend/requirements.txt without hash-pinned package entries.
+
+Frontend JSON Error
+
+Error:
+
+Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+
+This usually means that the frontend received an HTML response instead of the Flask JSON API response.
+
+Check:
+
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+Make sure the frontend calls:
+
+/api/chat
+
+Restart Next.js after changing environment variables.
+
+Qdrant Connection Error
+
+Check:
+
+QDRANT_URL=your_qdrant_url
+QDRANT_API_KEY=your_qdrant_api_key
+QDRANT_COLLECTION=all_documents
+
+Make sure the Qdrant cluster is active and the API key is valid.
+
+Qdrant Vector Count
+
+Check:
+
+http://localhost:5000/api/status
+
+Expected:
+
+Vector DB: Qdrant
+Collection: all_documents
+Chunks: 25860
+🔒 Security
+
+Never commit:
+
+.env
+backend/.env
+frontend/.env.local
+QDRANT_API_KEY
+HF_TOKEN
+
+API keys should always be stored using environment variables.
+
+For production deployment, add secrets through Render's environment-variable settings.
+
+📈 Current Project Status
+Component	Status
+Next.js Frontend	✅
+v0 UI	✅
+Flask Backend	✅
+REST API	✅
+Local ChromaDB	✅ Backup
+Qdrant Cloud	✅
+Vector Migration	✅
+Vectors	✅ 25,860
+Embedding Dimension	✅ 384
+all-MiniLM-L6-v2	✅
+Qwen 2.5 7B Instruct	✅
+Hugging Face API	✅
+Docker	✅
+Docker Compose	✅
+WSL 2	✅
+Docker Desktop	✅
+Local Docker Testing	✅
+Qdrant Migration	✅
+🎯 Future Improvements
+📄 Upload documents from the frontend
+🔄 Automatic document ingestion
+🗂️ Document management
+👤 User authentication
+💬 Conversation history
+📌 Source citations
+📊 RAG analytics
+⚡ Streaming AI responses
+🔎 Hybrid search
+📱 Improved mobile responsiveness
+☁️ Production deployment
+📈 Monitoring and logging
+👨‍💻 Author
+
+Subash V
+
+Bachelor of Computer Science and Engineering
+
+RVS Technical Campus, Coimbatore
+
+⭐ Project Summary
+
+This project demonstrates a complete Retrieval-Augmented Generation (RAG) system by combining semantic vector search with a large language model.
+
+The system retrieves relevant information from a vector database and provides that context to Qwen before generating an AI response.
+
+Final Technology Stack
+Next.js
+   +
+React
+   +
+Flask
+   +
+Qdrant Cloud
+   +
+Sentence Transformers
+   +
+Hugging Face
+   +
+Qwen 2.5
+   +
+Docker
+   +
+Docker Compose
+
+The project provides a scalable foundation for building document-based AI applications.
+
+
+
+**Copy everything from `# 🤖 RAG Chatbot` through the end of the code block into your GitHub `README.md`.**
