@@ -2,11 +2,5 @@ Flask
 flask-cors
 python-dotenv
 gunicorn
-
 huggingface-hub
-langchain-huggingface
 qdrant-client
-
-sentence-transformers
-torch
-transformers

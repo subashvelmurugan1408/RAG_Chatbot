@@ -134,15 +134,16 @@ except Exception as e:
 # ============================================================================
 
 print(
-    "Initializing Hugging Face embeddings...",
+    "Initializing Hugging Face embedding API...",
     end="",
     flush=True
 )
 
 try:
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name=EMBEDDING_MODEL
+    hf_embedding_client = InferenceClient(
+        provider="hf-inference",
+        api_key=HF_TOKEN
     )
 
     print(" ✓")
@@ -151,10 +152,11 @@ except Exception as e:
 
     print(" ❌")
 
-    print(f"Error loading embeddings: {e}")
+    print(
+        f"Error initializing embedding API: {e}"
+    )
 
     exit(1)
-
 
 # ============================================================================
 # LOAD CHROMADB
@@ -277,7 +279,7 @@ def generate_answer(prompt_text):
     return response.choices[0].message.content
 def retrieve_documents(question, k=5):
 
-    query_embedding = embeddings.embed_query(question)
+    query_embedding = create_query_embedding(question)
 
     results = qdrant_client.query_points(
         collection_name=COLLECTION_NAME,
@@ -308,8 +310,26 @@ def retrieve_documents(question, k=5):
         })
 
     return documents
+def create_query_embedding(text):
 
+    result = hf_embedding_client.feature_extraction(
+        text,
+        model=EMBEDDING_MODEL
+    )
 
+    embedding = result.tolist()
+
+    # Handle possible 2D output
+    if len(embedding) == 1:
+        embedding = embedding[0]
+
+    if len(embedding) != 384:
+        raise ValueError(
+            f"Expected 384-dimensional embedding, "
+            f"got {len(embedding)}"
+        )
+
+    return embedding
 # ============================================================================
 # RAG FUNCTION
 # ============================================================================
