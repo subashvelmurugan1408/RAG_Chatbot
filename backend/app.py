@@ -113,7 +113,7 @@ print("Initializing Hugging Face client...", end="", flush=True)
 try:
 
     hf_client = InferenceClient(
-        provider="auto",
+         provider="together",
         api_key=HF_TOKEN
     )
 
