@@ -32,7 +32,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from huggingface_hub import InferenceClient
-from langchain_huggingface import HuggingFaceEmbeddings
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance
 
