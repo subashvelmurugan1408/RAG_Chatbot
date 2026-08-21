@@ -32,7 +32,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from huggingface_hub import InferenceClient
-from langchain_huggingface import HuggingFaceEmbeddings
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance
 
@@ -54,7 +53,7 @@ COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "all_documents")
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
-LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+LLM_MODEL = "google/gemma-3-4b-it"
 
 HF_TOKEN = os.getenv("HF_TOKEN")
 
@@ -114,9 +113,9 @@ print("Initializing Hugging Face client...", end="", flush=True)
 try:
 
     hf_client = InferenceClient(
-        provider="auto",
-        api_key=HF_TOKEN
-    )
+    provider="deepinfra",
+    api_key=HF_TOKEN
+)
 
     print(" ✓")
 
