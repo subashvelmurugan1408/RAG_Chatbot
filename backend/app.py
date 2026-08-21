@@ -53,7 +53,7 @@ COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "all_documents")
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
-LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+LLM_MODEL = "Qwen/Qwen3-4B-Instruct-2507"
 
 HF_TOKEN = os.getenv("HF_TOKEN")
 
@@ -107,13 +107,12 @@ print("=" * 70)
 
 print("\nLoading RAG system...\n")
 
-
 print("Initializing Hugging Face client...", end="", flush=True)
 
 try:
 
     hf_client = InferenceClient(
-         provider="together",
+        provider="auto",
         api_key=HF_TOKEN
     )
 
@@ -133,9 +132,9 @@ except Exception as e:
 # ============================================================================
 
 print(
-    "Initializing Hugging Face embedding API...",
-    end="",
-    flush=True
+"Initializing Hugging Face embedding API...",
+end="",
+flush=True
 )
 
 try:
