@@ -1,0 +1,398 @@
+# 🤖 RAG Chatbot
+
+A Retrieval-Augmented Generation (RAG) chatbot that allows users to ask questions about provided documents and generate answers using retrieved document context and a Large Language Model.
+
+The project combines a **Next.js frontend** and **Flask RAG backend** into a **single Docker container**, making deployment easier on platforms such as Render.
+
+---
+live Demo 🚀
+https://rag-chatbot-ost8.onrender.com
+## 🚀 Features
+
+- 💬 Interactive AI chatbot interface
+- 📄 Document-based question answering
+- 🔎 Retrieval-Augmented Generation (RAG)
+- 🧠 Hugging Face LLM integration
+- 🔢 Hugging Face embedding API
+- 🗄️ ChromaDB vector database
+- ⚡ Flask REST API
+- ⚛️ Next.js frontend
+- 🐳 Single Docker container deployment
+- 🔐 Environment-variable based API key management
+- ☁️ Ready for cloud deployment
+
+---
+
+## 🏗️ Architecture
+
+```text
+                         User
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │   Next.js UI    │
+                  │    Port 3000    │
+                  └────────┬────────┘
+                           │
+                           │ /api/chat
+                           ▼
+                  ┌─────────────────┐
+                  │   Next.js       │
+                  │    Rewrite      │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ Flask Backend   │
+                  │    Port 5000    │
+                  └────────┬────────┘
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+              ▼            ▼            ▼
+          ChromaDB     Embeddings   Hugging Face
+          Vector DB       API           LLM
+              │
+              ▼
+       Relevant Documents
+              │
+              ▼
+         Generated Answer
+📂 Project Structure
+RAG_Chatbot/
+│
+├── frontend/
+│   ├── app/
+│   │   ├── page.tsx
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   │
+│   ├── public/
+│   ├── package.json
+│   ├── package-lock.json
+│   └── next.config.mjs
+│
+├── backend/
+│   ├── app.py
+│   ├── chat_rag.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── documents/
+│
+├── documents/
+│
+├── Dockerfile
+├── start.sh
+├── .dockerignore
+├── .gitignore
+└── README.md
+🛠️ Technologies Used
+Frontend
+Next.js
+React
+TypeScript
+Tailwind CSS
+Lucide React
+Backend
+Python
+Flask
+Gunicorn
+REST API
+AI / RAG
+Hugging Face
+Large Language Models
+Text Embeddings
+Retrieval-Augmented Generation
+Vector Database
+ChromaDB
+Deployment
+Docker
+Render
+GitHub
+🔄 How RAG Works
+
+The application follows these steps:
+
+User Question
+      │
+      ▼
+Generate Query Embedding
+      │
+      ▼
+Search Vector Database
+      │
+      ▼
+Retrieve Relevant Documents
+      │
+      ▼
+Build Context
+      │
+      ▼
+Send Context + Question
+      │
+      ▼
+Hugging Face LLM
+      │
+      ▼
+Generate Answer
+      │
+      ▼
+Display Answer
+
+The chatbot retrieves relevant information from the stored documents before generating an answer.
+
+This helps the LLM answer questions based on the application's document collection instead of relying only on its pretrained knowledge.
+
+🐳 Docker Architecture
+
+The project uses a single Docker container to run both the frontend and backend.
+
+                    Docker Container
+              ┌──────────────────────────┐
+              │                          │
+              │   Next.js Frontend       │
+              │       :3000              │
+              │          │               │
+              │          │ /api/*        │
+              │          ▼               │
+              │   Flask Backend          │
+              │       :5000              │
+              │          │               │
+              │          ▼               │
+              │     RAG System           │
+              │                          │
+              └──────────────────────────┘
+
+The public-facing application uses port 3000.
+
+Next.js forwards API requests such as:
+
+/api/chat
+
+to the Flask backend running internally on:
+
+127.0.0.1:5000
+⚙️ Environment Variables
+
+Create:
+
+backend/.env
+
+for local development.
+
+Example:
+
+HF_TOKEN=your_huggingface_token
+QDRANT_URL=your_qdrant_url
+QDRANT_API_KEY=your_qdrant_api_key
+QDRANT_COLLECTION=your_collection_name
+
+Do not commit .env files to GitHub.
+
+For Render deployment, add these values under:
+
+Render
+→ Service
+→ Environment
+→ Environment Variables
+💻 Local Development
+1. Clone the repository
+git clone https://github.com/subashvelmurugan1408/RAG_Chatbot.git
+cd RAG_Chatbot
+2. Backend setup
+
+Create a Python virtual environment:
+
+python -m venv venv
+
+Activate it on Windows:
+
+venv\Scripts\activate
+
+Install backend dependencies:
+
+pip install -r backend/requirements.txt
+3. Frontend setup
+
+Go to the frontend directory:
+
+cd frontend
+
+Install dependencies:
+
+npm install
+
+Return to the project root:
+
+cd ..
+🐳 Run With Docker
+
+The recommended way to run the complete application is Docker.
+
+Build the Docker image
+
+From the project root:
+
+docker build -t rag-chatbot .
+Run the container
+docker run --env-file backend/.env -p 3000:3000 rag-chatbot
+
+Open the application:
+
+http://localhost:3000
+🔍 Check Running Container
+docker ps
+
+View container logs:
+
+docker logs -f rag-chatbot
+
+Run the container in the background:
+
+docker run -d \
+  --name rag-chatbot \
+  --env-file backend/.env \
+  -p 3000:3000 \
+  rag-chatbot
+
+Stop the container:
+
+docker stop rag-chatbot
+
+Remove the container:
+
+docker rm rag-chatbot
+🔌 API
+Chat API
+Endpoint
+POST /api/chat
+Request
+{
+  "message": "What is this document about?"
+}
+Example Response
+{
+  "success": true,
+  "response": "The document discusses..."
+}
+🧪 Testing With Postman
+
+Start the Docker container:
+
+docker run --env-file backend/.env -p 3000:3000 rag-chatbot
+
+In Postman:
+
+Method: POST
+URL: http://localhost:3000/api/chat
+
+Headers:
+
+Content-Type: application/json
+
+Body → Raw → JSON:
+
+{
+  "message": "What is this document about?"
+}
+🌐 Deployment
+
+The project is designed to be deployed as a single Docker-based service.
+
+The deployment architecture is:
+
+GitHub
+   │
+   ▼
+Render
+   │
+   ▼
+Docker Build
+   │
+   ▼
+Single Container
+   │
+   ├── Next.js :3000
+   │
+   └── Flask :5000
+Render Configuration
+Environment:
+Docker
+
+Root Directory:
+(empty)
+
+Dockerfile Path:
+./Dockerfile
+
+Docker Build Context:
+.
+
+Docker Command:
+(empty)
+
+The Dockerfile already specifies the startup command:
+
+CMD ["/start.sh"]
+
+The application listens publicly on:
+
+Port 3000
+🔐 Security
+
+Never commit secrets such as:
+
+.env
+HF_TOKEN
+QDRANT_API_KEY
+
+to GitHub.
+
+Use environment variables instead.
+
+The .dockerignore file prevents sensitive files and unnecessary directories from being included in the Docker build context.
+
+📈 Future Improvements
+📚 Multiple document upload
+🧾 PDF document processing
+💾 Chat history storage
+🔐 User authentication
+📊 RAG evaluation and monitoring
+⚡ Streaming AI responses
+🗂️ Document management interface
+🔎 Improved semantic search
+🌐 Production frontend deployment
+📱 Responsive mobile interface
+👨‍💻 Author
+
+Subash V
+
+Computer Science and Engineering Student
+
+GitHub:
+
+https://github.com/subashvelmurugan1408
+
+LinkedIn:
+
+https://www.linkedin.com/in/subash-v-1557a832b
+
+📄 License
+
+This project is developed for educational and project purposes.
+
+
+### One correction before you commit it
+
+Your actual structure has `documents/` at the **root**, not necessarily `backend/documents/`, so in the README structure you should use:
+
+```text
+RAG_Chatbot/
+├── frontend/
+├── backend/
+├── documents/
+├── Dockerfile
+├── start.sh
+└── README.md
+
+That's the structure we've confirmed from your project.
