@@ -79,7 +79,7 @@ import { SettingsView } from './settings-view'
 
   try {
     const response = await fetch(
-       `${process.env.NEXT_PUBLIC_API_URL}/api/chat`,
+  `/api/chat`,
       {
         method: 'POST',
         headers: {
